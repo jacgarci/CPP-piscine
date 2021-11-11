@@ -1,4 +1,4 @@
-SRCS= 			Account.cpp tests.cpp
+SRCS= 			main.cpp Zombie.cpp newZombie.cpp randomChump.cpp
 
 OBJS			= $(SRCS:.cpp=.o)
 
@@ -6,7 +6,7 @@ CXX				= clang++
 RM				= rm -f
 CXXFLAGS		= -Wall -Wextra -Werror -std=c++98 -g3 -fsanitize=address
 
-NAME			= Whatever
+NAME			= zombie
 
 all:			$(NAME)
 
