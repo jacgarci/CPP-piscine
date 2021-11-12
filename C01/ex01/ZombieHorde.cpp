@@ -1,8 +1,25 @@
 #include "Zombie.hpp"
 
-Zombie  *Zombie::zombieHorde(int N, std::string name)
+Zombie  *zombieHorde(int N, std::string name)
 {
-    Zombie  *horde = new Zombie[N];
+    Zombie  *hordePtr;
+    std::string aux;
 
-    return (horde);
+    if (N < 1)
+    {
+        std::cout << "Invalid number argument, returning NULL" << std::endl;
+        return (0);
+    }
+
+    hordePtr = new Zombie[N];
+    aux = name;
+    for (int i = 0; i < N; i++)
+    {
+        if (i % 2 == 0)
+            hordePtr[i].setName(name.append(" Even"));
+        else
+            hordePtr[i].setName(name.append(" Odd"));
+        name = aux;
+    }
+    return (hordePtr);
 }
