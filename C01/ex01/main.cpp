@@ -11,4 +11,5 @@ int main(void)
     for (int i = 0; i < N; i++)
         hordePtr[i].announce();
     delete [] hordePtr;
+    return (0);
 }
