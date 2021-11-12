@@ -2,11 +2,10 @@
 #include <fstream>
 #include <string>
 
-static void replace(std::string &fileName, std::string &s1, std::string &s2, std::ifstream &ifs, std::ofstream &ofs)
+static void replace(std::string &s1, std::string &s2, std::ifstream &ifs, std::ofstream &ofs)
 {
     std::string line;
-
-    (void)fileName;
+    
     while (std::getline(ifs, line, '\n'))
     {
         for(size_t i = 0; i < line.length();)
@@ -63,7 +62,7 @@ static int  checkArgs(int argc, char **argv)
         return (0);
     }
 
-    replace(fileName, s1, s2, ifs, ofs);
+    replace(s1, s2, ifs, ofs);
 
     ifs.close();
     ofs.close();
