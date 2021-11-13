@@ -1,6 +1,5 @@
 #include "Karen.hpp"
 
-
 static void activateFilter(int level)
 {
     std::string levels[] = {"DEBUG", "INFO", "WARNING", "ERROR"};
