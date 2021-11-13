@@ -1,4 +1,4 @@
-SRCS= 			
+SRCS= 			main.cpp Karen.cpp
 
 OBJS			= $(SRCS:.cpp=.o)
 
@@ -6,7 +6,7 @@ CXX				= clang++
 RM				= rm -f
 CXXFLAGS		= -Wall -Wextra -Werror -std=c++98 -g3 -fsanitize=address
 
-NAME			= 
+NAME			= karen
 
 all:			$(NAME)
 
