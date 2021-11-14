@@ -37,37 +37,105 @@ Fixed   &Fixed::operator=(Fixed const &F)
     return (*this);
 }
 
-bool    Fixed::operator==(Fixed const &rhs)
+//Comparison operators (arguments are not modified)
+bool    Fixed::operator==(Fixed const &rhs) const
 {
     return (this->getRawBits() == rhs.getRawBits());
 }
 
-bool    Fixed::operator!=(Fixed const &rhs)
+bool    Fixed::operator!=(Fixed const &rhs) const
 {
     return (!operator==(rhs));
 }
 
-bool    Fixed::operator<(Fixed const &rhs)
+bool    Fixed::operator<(Fixed const &rhs) const
 {
     return (this->getRawBits() < rhs.getRawBits());
 }
 
-bool    Fixed::operator>(Fixed const &rhs)
+bool    Fixed::operator>(Fixed const &rhs) const
 {
     return (!operator<(rhs));
 }
 
-bool    Fixed::operator<=(Fixed const &rhs)
+bool    Fixed::operator<=(Fixed const &rhs) const
 {
     return (operator<(rhs) || operator==(rhs));
 }
 
-bool    Fixed::operator>=(Fixed const &rhs)
+bool    Fixed::operator>=(Fixed const &rhs) const
 {
     return (operator>(rhs) || operator==(rhs));
 }
 
 
+//Arithmetic operators (arguments are not modified)
+Fixed   Fixed::operator+(Fixed const &rhs) const
+{
+    Fixed   result;
+
+    result.setRawBits(this->getRawBits() + rhs.getRawBits());
+    return (result);
+}
+
+Fixed   Fixed::operator-(Fixed const &rhs) const
+{
+    Fixed   result;
+
+    result.setRawBits(this->getRawBits() - rhs.getRawBits());
+    return (result);
+}
+
+Fixed   Fixed::operator*(Fixed const &rhs) const
+{
+    Fixed   result;
+
+    result.setRawBits((this->getRawBits() * rhs.getRawBits()) / (1 << Fixed::_fractionalBits));
+    return (result);
+}
+
+Fixed   Fixed::operator/(Fixed const &rhs) const
+{
+    Fixed   result;
+
+    result.setRawBits((this->getRawBits() / rhs.getRawBits()) * (1 << Fixed::_fractionalBits));
+    return (result);
+}
+
+//Increment/Decrement operators
+//**Pre-increment/decrement (returns a reference to the result)
+Fixed   &Fixed::operator++(void)
+{
+    this->setRawBits(this->getRawBits() + 1);
+    return (*this);
+}
+
+Fixed   &Fixed::operator--(void)
+{
+    this->setRawBits(this->getRawBits() - 1);
+    return (*this);
+}
+
+//**Post-increment/decrement (creates a copy of the object, 
+//increments or decrements the value of the object and 
+//returns the copy from before the increment or decrement.)
+Fixed   Fixed::operator++(int i)
+{
+    (void)i;
+    Fixed   copy(*this);
+
+    this->operator++();
+    return (copy);
+}
+
+Fixed   Fixed::operator--(int i)
+{
+    (void)i;
+    Fixed   copy(*this);
+
+    this->operator--();
+    return (copy);
+}
 
 //GETTERS SETTERS
 
@@ -91,6 +159,26 @@ float   Fixed::toFloat(void) const
 float   Fixed::toInt(void) const
 {
     return (this->getRawBits() / (1 << Fixed::_fractionalBits));
+}
+
+Fixed        &Fixed::min(Fixed &lhs, Fixed &rhs)
+{
+    return ((lhs < rhs) ? lhs : rhs);
+}
+
+Fixed const &Fixed::min(Fixed const &lhs, Fixed const &rhs)
+{
+    return ((lhs < rhs) ? lhs : rhs);
+}
+
+Fixed        &Fixed::max(Fixed &lhs, Fixed &rhs)
+{
+    return ((lhs > rhs) ? lhs : rhs);
+}
+
+Fixed const &Fixed::max(Fixed const &lhs, Fixed const &rhs)
+{
+    return ((lhs > rhs) ? lhs : rhs);
 }
 
 std::ostream   &operator<<(std::ostream &o, Fixed const &F)
