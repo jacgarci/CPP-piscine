@@ -41,6 +41,7 @@ static void getClapTrapInfo(ClapTrap const &c)
 
 int main(void)
 {
+    ScavTrap uselessClapTrap;
     ScavTrap yellowClapTrap("Yellow");
     ClapTrap suitedClapTrap("Suited");
     ScavTrap blueScavTrap(yellowClapTrap);
@@ -60,5 +61,6 @@ int main(void)
     pressEnter();
     getClapTrapInfo(yellowClapTrap);
     getClapTrapInfo(suitedClapTrap);
+    getClapTrapInfo(blueScavTrap);
     pressEnter();
 }

@@ -1,21 +1,21 @@
 #include "ClapTrap.hpp"
 
-ClapTrap::ClapTrap() : _name(std::string()), _hitPoints(0), _energyPoints(0), _atackDamage(0)
+ClapTrap::ClapTrap() : _name(0), _hitPoints(0), _energyPoints(0), _atackDamage(0)
 {
-    std::cout << "\nSucces creating an useless CL4P-TP;\n";
+    std::cout << "\nSucces creating an useless CL4P-TP;";
 }
 
-ClapTrap::ClapTrap(std::string name) : _name(name), _hitPoints(10), _energyPoints(10), _atackDamage(0)
+ClapTrap::ClapTrap(std::string const &name) : _name(name), _hitPoints(10), _energyPoints(10), _atackDamage(0)
 {
     std::cout 
-    << "Success creating " << this->getName() << "  CL4P-TP" << std::endl;
+    << "\nSuccess creating " << this->getName() << "  CL4P-TP;";
 }
 
 ClapTrap::ClapTrap(ClapTrap const &src)
 {
-    *this = src;
     std::cout
-    << "Success creating " << this->getName() << "  CL4P-TP" << std::endl;
+    << "\nSuccess creating " << src.getName() << "  CL4P-TP;";
+    *this = src;
 }
 
 ClapTrap::~ClapTrap(void)
@@ -53,6 +53,11 @@ void    ClapTrap::setHitPoints(int const hitPoints)
 void    ClapTrap::setEnergyPoints(int const energyPoints)
 {
     this->_energyPoints = energyPoints;
+}
+
+void    ClapTrap::setAttackDamage(int const attackDamage)
+{
+    this->_atackDamage = attackDamage;
 }
 
 //Asigment operator

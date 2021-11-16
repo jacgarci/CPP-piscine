@@ -1,6 +1,6 @@
 #include "ScavTrap.hpp"
 
-ScavTrap::ScavTrap() 
+ScavTrap::ScavTrap()
 {
     std::cout << " is a SC4V-TR4P btw" << std::endl;
 }

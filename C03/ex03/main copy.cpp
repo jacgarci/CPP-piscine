@@ -1,4 +1,6 @@
 #include "ClapTrap.hpp"
+#include "ScavTrap.hpp"
+#include "FragTrap.hpp"
 
 static void pressEnter()
 {
@@ -40,23 +42,22 @@ static void getClapTrapInfo(ClapTrap const &c)
 
 int main(void)
 {
-    ClapTrap defaultClapTrap;
-    ClapTrap yellowClapTrap("Yellow");
-    ClapTrap suitedClapTrap("Suited");
-    ClapTrap copy(suitedClapTrap);
+    FragTrap yellowClapTrap("Yellow");
+    ScavTrap suitedClapTrap("Suited");
+    FragTrap blueScavTrap(yellowClapTrap);
 
     getClapTrapInfo(yellowClapTrap);
     getClapTrapInfo(suitedClapTrap);
     pressEnter();
     yellowClapTrap.attack(suitedClapTrap.getName());
     suitedClapTrap.takeDamage(yellowClapTrap.getAttackDamage());
-    yellowClapTrap.beRepaired(10);
-    while (yellowClapTrap.getEnergyPoints() > 0)
+    suitedClapTrap.beRepaired(10);
+    while (yellowClapTrap.getEnergyPoints() > 0 && suitedClapTrap.getHitPoints() > 0)
     {
         yellowClapTrap.attack(suitedClapTrap.getName());
         suitedClapTrap.takeDamage(yellowClapTrap.getAttackDamage());
     }
-    yellowClapTrap.attack(suitedClapTrap.getName());
+    yellowClapTrap.highFivesGuys();
     pressEnter();
     getClapTrapInfo(yellowClapTrap);
     getClapTrapInfo(suitedClapTrap);
