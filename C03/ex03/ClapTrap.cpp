@@ -1,6 +1,6 @@
 #include "ClapTrap.hpp"
 
-ClapTrap::ClapTrap() : _name(0), _hitPoints(0), _energyPoints(0), _atackDamage(0)
+ClapTrap::ClapTrap() : _name(std::string()), _hitPoints(0), _energyPoints(0), _atackDamage(0)
 {
     std::cout << "\nSucces creating an useless CL4P-TP;";
 }

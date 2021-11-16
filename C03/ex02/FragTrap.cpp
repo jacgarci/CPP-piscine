@@ -25,10 +25,7 @@ FragTrap::~FragTrap()
 
 FragTrap    &FragTrap::operator=(FragTrap const &rhs)
 {
-    this->_name = rhs._name;
-    this->_hitPoints = rhs._hitPoints;
-    this->_energyPoints = rhs._energyPoints;
-    this->_atackDamage = rhs._atackDamage;
+    ClapTrap::operator=(rhs);
     return (*this);
 }
 
@@ -49,7 +46,7 @@ void    FragTrap::attack(std::string const &target)
         << " have not enough energy to attack"  << std::endl;
 }
 
-void    FragTrap::highFivesGuys(void)
+void    FragTrap::highFivesGuys(void) const
 {
     std::cout << "FR4G-TP: high five guys!!!!" << std::endl;
 }

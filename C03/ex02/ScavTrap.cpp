@@ -25,10 +25,7 @@ ScavTrap::~ScavTrap()
 
 ScavTrap    &ScavTrap::operator=(ScavTrap const &rhs)
 {
-    this->_name = rhs.getName();
-    this->_hitPoints = rhs.getHitPoints();
-    this->_energyPoints = rhs.getEnergyPoints();
-    this->_atackDamage = rhs.getAttackDamage();
+    ClapTrap::operator=(rhs);
     return (*this);
 }
 
@@ -49,7 +46,7 @@ void    ScavTrap::attack(std::string const &target)
         << " have not enough energy to attack"  << std::endl;
 }
 
-void    ScavTrap::guardGate(void)
+void    ScavTrap::guardGate(void) const
 {
     std::cout
     << "ScavTrap activate Guard Keeper mode" << std::endl;

@@ -45,10 +45,12 @@ int main(void)
     FragTrap uselessScavTrap;
     FragTrap yellowClapTrap("Yellow");
     ScavTrap suitedClapTrap("Suited");
+    ScavTrap copy = suitedClapTrap;
     FragTrap blueScavTrap(yellowClapTrap);
 
     getClapTrapInfo(yellowClapTrap);
     getClapTrapInfo(suitedClapTrap);
+    getClapTrapInfo(copy);
     pressEnter();
     yellowClapTrap.attack(suitedClapTrap.getName());
     suitedClapTrap.takeDamage(yellowClapTrap.getAttackDamage());

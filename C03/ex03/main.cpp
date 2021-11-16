@@ -1,6 +1,7 @@
 #include "ClapTrap.hpp"
 #include "ScavTrap.hpp"
 #include "FragTrap.hpp"
+#include "DiamondTrap.hpp"
 
 static void pressEnter()
 {
@@ -14,9 +15,9 @@ static void pressEnter()
 static std::string formatString(std::string str)
 {
     std::string result;
-    if (str.length() > 10)
+    if (str.length() > 9)
     {
-        result.append(str, 0, 9);
+        result.append(str, 0, 8);
         result.append(1u, '.');
         return (result);
     }
@@ -42,24 +43,29 @@ static void getClapTrapInfo(ClapTrap const &c)
 
 int main(void)
 {
-    FragTrap yellowClapTrap("Yellow");
-    ScavTrap suitedClapTrap("Suited");
-    FragTrap blueScavTrap(yellowClapTrap);
+    DiamondTrap uselessScavTrap("diamond");
+    DiamondTrap copy(uselessScavTrap);
+    DiamondTrap equal = copy;
 
-    getClapTrapInfo(yellowClapTrap);
-    getClapTrapInfo(suitedClapTrap);
     pressEnter();
-    yellowClapTrap.attack(suitedClapTrap.getName());
-    suitedClapTrap.takeDamage(yellowClapTrap.getAttackDamage());
-    suitedClapTrap.beRepaired(10);
-    while (yellowClapTrap.getEnergyPoints() > 0 && suitedClapTrap.getHitPoints() > 0)
+    getClapTrapInfo(uselessScavTrap);
+    getClapTrapInfo(copy);
+    getClapTrapInfo(equal);
+   
+    pressEnter();
+    uselessScavTrap.attack(copy.getName());
+    copy.takeDamage(uselessScavTrap.getAttackDamage());
+    copy.beRepaired(10);
+    while (uselessScavTrap.getEnergyPoints() > 0 && copy.getHitPoints() > 0)
     {
-        yellowClapTrap.attack(suitedClapTrap.getName());
-        suitedClapTrap.takeDamage(yellowClapTrap.getAttackDamage());
+        uselessScavTrap.attack(copy.getName());
+        copy.takeDamage(uselessScavTrap.getAttackDamage());
     }
-    yellowClapTrap.highFivesGuys();
+    uselessScavTrap.guardGate();
+    copy.highFivesGuys();
+    equal.whoAmI();
     pressEnter();
-    getClapTrapInfo(yellowClapTrap);
-    getClapTrapInfo(suitedClapTrap);
+    getClapTrapInfo(uselessScavTrap);
+    getClapTrapInfo(copy);
     pressEnter();
 }
