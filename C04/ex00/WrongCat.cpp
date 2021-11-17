@@ -5,6 +5,11 @@ WrongCat::WrongCat() : WrongAnimal("WrongCat")
     std::cout << "WrongCat class constructor called" << std::endl;
 }
 
+WrongCat::WrongCat(WrongCat const &src) : WrongAnimal(src)
+{
+    std::cout << "WrongCat copy constructor called" << std::endl;
+}
+
 WrongCat::~WrongCat()
 {
     std::cout << "WrongCat class destructtor called" << std::endl;
