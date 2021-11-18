@@ -27,7 +27,7 @@ void    MateriaSource::learnMateria(AMateria *m)
 {
     for (int i = 0; i < 4; i++)
     {
-        if (!spells[i])
+        if (spells[i] == nullptr)
         {
             spells[i] = m;
             return ;
