@@ -1,17 +1,17 @@
 #include "Character.hpp"
 
-Character::Character() : _name(nullptr)
+Character::Character() : _name(std::string())
 {
     std::cout << "Character default constructor called" << std::endl;
     for (int i = 0; i < 4; i++)
-        inventory[i] = nullptr;
+        inventory[i] = 0;
 }
 
 Character::Character(std::string const &name) : _name(name)
 {
     std::cout << "Character parameter constructor called" << std::endl;
     for (int i = 0; i < 4; i++)
-        inventory[i] = nullptr;
+        inventory[i] = 0;
 }
 //Deleting a null pointer has no effect, 
 //so it is not necessary to check for a null pointer before calling delete.
@@ -24,12 +24,10 @@ Character::~Character()
 
 Character::Character(Character const &src) : _name(src._name)
 {
-    //Podria quitarlo y poner *this = src al haber puesto lo mismo en operator=??
-    //hacer pruba en el main
+    
     for (int i = 0; i < 4; i++)
-        delete inventory[i];
-    for (int i = 0; i < 4; i++)
-            inventory[i] = src.inventory[i]->clone();
+        inventory[i] = 0;
+    *this = src;
     std::cout << "Character copy constructor called" << std::endl;
 }
 
@@ -54,7 +52,7 @@ void    Character::unequip(int index)
 {
     if (index >= 0 && index < 4)
         if (inventory[index])
-            inventory[index] = nullptr;
+            inventory[index] = 0;
 }
 
 //Not need to check target, references always refence to something
@@ -67,11 +65,13 @@ void    Character::use(int idx, ICharacter &target)
 
 Character   &Character::operator=(Character const &rhs)
 {
+    if (this == &rhs)
+        return (*this);
     this->_name = rhs._name;
-    //Probar el operador en main para ver si delete da fallo
     for (int i = 0; i < 4; i++)
         delete inventory[i];
-     for (int i = 0; i < 4; i++)
-         inventory[i] = rhs.inventory[i]->clone();
+    for (int i = 0; i < 4; i++)
+        if (rhs.inventory[i] != 0)
+            this->inventory[i] = rhs.inventory[i]->clone();
     return (*this);
 }

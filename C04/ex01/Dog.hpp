@@ -8,7 +8,7 @@ class Dog : public Animal
 {
 private:
 
-    Brain *brain;
+    Brain   *brain;
 
 public:
 

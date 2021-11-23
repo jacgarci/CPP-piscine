@@ -17,6 +17,7 @@ DiamondTrap::DiamondTrap(std::string const &name) : ClapTrap(name + "_clap_name"
 DiamondTrap::DiamondTrap(DiamondTrap const &src) : ClapTrap(src)
 {
     std::cout << " is a D14MXND-TR4P btw" << std::endl;
+    this->_name = src._name;
 }
 
 DiamondTrap::~DiamondTrap()
@@ -27,6 +28,7 @@ DiamondTrap::~DiamondTrap()
 DiamondTrap &DiamondTrap::operator=(DiamondTrap const &rhs)
 {
     ClapTrap::operator=(rhs);
+    this->_name = rhs._name;
     return (*this);
 }
 
