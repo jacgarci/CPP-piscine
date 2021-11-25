@@ -16,10 +16,10 @@ int main()
 
     try
     {
-        Form        *b = new Form("28C", 1, 151); 
+        Form        *b = new Form("28C", 1, 151);
         std::cout << *b << std::endl;
     }
-    catch(const std::exception& e)
+    catch(const std::exception &e)
     {
         std::cerr << e.what() << '\n';
     }
