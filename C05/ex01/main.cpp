@@ -13,15 +13,4 @@ int main()
     std::cout << *Camille << std::endl;
     Camille->signForm(*a);
     std::cout << *a << std::endl;
-
-    try
-    {
-        Form        *b = new Form("28C", 1, 151);
-        std::cout << *b << std::endl;
-    }
-    catch(const std::exception &e)
-    {
-        std::cerr << e.what() << '\n';
-    }
-    
 }
