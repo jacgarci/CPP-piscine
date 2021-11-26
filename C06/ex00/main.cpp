@@ -2,7 +2,30 @@
 #include <string>
 #include <limits>
 
-static bool isDouble(std::string argument)
+static void executeConversion(std::string const &argument, int const &type)
+{
+    switch (type)
+    {
+    case 0:
+        //convertChar(argument[0])
+        break;
+    case 1:
+        //convertInt(std::stoi(argument))
+        break;
+    case 2:
+        //convertFloat(std::stof(argument))
+        break;
+    case 3:
+        //convertDouble(std::stod(argument))
+        break;
+    
+    default:
+        std::cout << "Not a valid type." << std::endl;
+        break;
+    }
+}
+
+static bool isDouble(std::string const &argument)
 {
     int dot = 0;
 
@@ -15,10 +38,19 @@ static bool isDouble(std::string argument)
     }
     if (dot != 1)
         return (false);
+    try
+    {
+        std::stod(argument);
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << "Number out of double limit. ";
+        return (false);
+    }
     return (true);
 }
 
-static bool isFloat(std::string argument)
+static bool isFloat(std::string const &argument)
 {
     int     dot = 0;
     int     f = 0;
@@ -37,10 +69,19 @@ static bool isFloat(std::string argument)
     }
     if (dot != 1 || f != 1 || argument[argument.length() - 1] != 'f' || !digits)
         return (false);
+    try
+    {
+        std::stof(argument);
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << "Number out of float limit. ";
+        return (false);
+    }  
     return (true);
 }
 
-static bool isInt(std::string argument)
+static bool isInt(std::string const &argument)
 {
     for (size_t i = 0; i < argument.length(); i++)
         if (!isdigit(argument[i]))
@@ -58,14 +99,14 @@ static bool isInt(std::string argument)
     return (true);
 }
 
-static bool isChar(std::string argument)
+static bool isChar(std::string const &argument)
 {
     if (argument.length() == 1 && (argument[0] > 31 && argument[0] < 127))
         return (true);
     return (false);
 }
 
-static int getType(std::string argument)
+static int getType(std::string const &argument)
 {
     if (isChar(argument))
         return (0);
@@ -85,7 +126,7 @@ static bool checkArgs(int argc, char **argv)
         std::cout << "Invalid number of arguments" << std::endl;
         return (false);
     }
-    std::string str(argv[1]);
+    std::string const str(argv[1]);
     if (str.empty())
     {
         std::cout << "Argument cant be empty" << std::endl;
@@ -104,15 +145,10 @@ int main(int argc, char **argv)
     if (!checkArgs(argc, argv))
         return (0);
 
-    std::string arg(argv[1]);
+    std::string const arg(argv[1]);
     int type;
 
     type = getType(arg);
-    if (type == 4)
-    {
-        std::cout << "Not a valid type." << std::endl;
-        return (0);
-    }
-    //executeConversion(argument, type); 
+    executeConversion(arg, type); 
     return (1);
 }
