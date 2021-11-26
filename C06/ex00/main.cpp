@@ -1,22 +1,92 @@
 #include <iostream>
 #include <string>
-#include <limits>
+#include <climits>
+
+static void convertFromDouble(double const &d)
+{
+    unsigned char   c = static_cast<unsigned char>(d);
+    long int        i = static_cast<long int>(d);
+    float           f = static_cast<float>(d);
+
+    std::cout << "char: ";
+    if (i < 32 || i > 126)
+        std::cout << "Non displayable" << std::endl;
+    else 
+        std::cout << c << std::endl;
+    if (i > INT_MAX || i < INT_MIN)
+        std::cout << "int: impossible" << std::endl;
+    else
+        std::cout<< "int: " << i << std::endl ;
+    std::cout
+    << "float: " << f << std::endl
+    << "double: " << d << std::endl;
+}
+
+static void convertFromFloat(float const &f)
+{
+    unsigned char   c = static_cast<unsigned char>(f);
+    long int        i = static_cast<long int>(f);
+    double          d = f;
+
+    std::cout << "char: ";
+    if (i < 32 || i > 126)
+        std::cout << "Non displayable" << std::endl;
+    else 
+        std::cout << c << std::endl;
+    if (i > INT_MAX || i < INT_MIN)
+        std::cout << "int: impossible" << std::endl;
+    else
+        std::cout<< "int: " << i << std::endl ;
+    std::cout
+    << "float: " << f << std::endl
+    << "double: " << d << std::endl;
+}
+
+static void convertFromInt(int const &i)
+{
+    unsigned char   c = static_cast<unsigned char>(i);
+    float           f = i;
+    double          d = i;
+
+    std::cout << "char: ";
+    if (i < 32 || i > 126)
+        std::cout << "Non displayable" << std::endl;
+    else 
+        std::cout << c << std::endl;
+    std::cout
+    << "int: " << i << std::endl 
+    << "float: " << f << std::endl
+    << "double: " << d << std::endl;
+    
+}
+
+static void convertFromChar(char const &c)
+{
+    int     i = c;
+    float   f = c;
+    double  d = c;
+    std::cout 
+    << "char: " << c << std::endl
+    << "int: " << i << std::endl
+    << "float: " << f << std::endl
+    << "double: " << d << std::endl;
+}
 
 static void executeConversion(std::string const &argument, int const &type)
 {
     switch (type)
     {
     case 0:
-        //convertChar(argument[0])
+        convertFromInt(std::stoi(argument));
         break;
     case 1:
-        //convertInt(std::stoi(argument))
+        convertFromChar(argument[0]);
         break;
     case 2:
-        //convertFloat(std::stof(argument))
+        convertFromFloat(std::stof(argument));
         break;
     case 3:
-        //convertDouble(std::stod(argument))
+        convertFromDouble(std::stod(argument));
         break;
     
     default:
@@ -29,8 +99,12 @@ static bool isDouble(std::string const &argument)
 {
     int dot = 0;
 
+    if (!argument.compare("-inf") || !argument.compare("+inf") || !argument.compare("nan"))
+        return (true);
     for (size_t i = 0; i < argument.length(); i++)
     {
+        if ((argument[0] == '-' || argument[0] == '+') && i == 0)
+            i++;
         if (!isdigit(argument[i]) && argument[i] != '.')
             return (false);
         if (argument[i] == '.')
@@ -56,8 +130,12 @@ static bool isFloat(std::string const &argument)
     int     f = 0;
     int     digits = 0;
 
+    if (!argument.compare("-inff") || !argument.compare("+inff") || !argument.compare("nanf"))
+        return (true);
     for (size_t i = 0; i < argument.length(); i++)
     {
+        if ((argument[0] == '-' || argument[0] == '+') && i == 0)
+            i++;
         if (!isdigit(argument[i]) && argument[i] != '.' && argument[i] != 'f')
             return (false);
         if (argument[i] == '.')
@@ -84,8 +162,12 @@ static bool isFloat(std::string const &argument)
 static bool isInt(std::string const &argument)
 {
     for (size_t i = 0; i < argument.length(); i++)
+    {
+        if ((argument[0] == '-' || argument[0] == '+') && i == 0)
+            i++;
         if (!isdigit(argument[i]))
             return (false);
+    }
     try
     {
         std::stoi(argument);
@@ -108,9 +190,9 @@ static bool isChar(std::string const &argument)
 
 static int getType(std::string const &argument)
 {
-    if (isChar(argument))
-        return (0);
     if (isInt(argument))
+        return (0);
+    if (isChar(argument))
         return (1);
     if (isFloat(argument))
         return (2);
