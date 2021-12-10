@@ -8,7 +8,7 @@ int main()
 
     std::cout << "Before swap: i(" << i << "), j(" << j << ")" << std::endl;
     swap(i, j);
-    std::cout << "Before swap: i(" << i << "), j(" << j << ")" << std::endl;
+    std::cout << "After swap: i(" << i << "), j(" << j << ")" << std::endl;
 
     char c = 'A';
     char d = 'B';

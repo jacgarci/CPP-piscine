@@ -30,7 +30,7 @@ public:
         return (*this);
     };
     
-    T   &operator[](size_t const &n)
+    T   &operator[](size_t const &n) const
     {
         if (n >= _size)
             throw std::out_of_range("Index out of bounds");
